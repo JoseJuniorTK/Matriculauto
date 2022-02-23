@@ -11,7 +11,7 @@ count = 0
 loop = True
 layout = [[sg.Combo(sorted(sg.user_settings_get_entry('-filenames-', [])), default_value=sg.user_settings_get_entry('-last filename-', ''), size=(50, 1), key='-FILENAME-'), sg.FolderBrowse(), sg.B('Clear History')],
           [sg.Button('Iniciar'),  sg.Button('Sair')]]
-window = sg.Window('Digitalizador de documentos 0.3b', layout)
+window = sg.Window('GERADOR DE SOLICITACAO DE MATRICULA', layout)
 while True:
     event, values = window.read()
     if event in (sg.WIN_CLOSED, 'Sair'):
@@ -24,12 +24,16 @@ while True:
         for docfiles in os.listdir(pathfiles):
             emlmatricula = os.path.join(pathfiles, docfiles)
             with open(f'{emlmatricula}', 'rb') as fp:
+                print(emlmatricula)
                 msg = BytesParser(policy=policy.default).parse(fp)
 
             text = msg.get_body(preferencelist=('plain')).get_content()
 
             text = re.sub('[*]', '', text)
+            text = text.replace("disciplinas:", "")
+            text = text.replace("disciplina:", "")
             text2 = re.findall(r":(.*)", text)
+            text2 = text2[:8]
             text3.append(text2)
 
         df = pd.DataFrame(text3, columns=['ALUNO', 'MATRÍCULA', 'Curso', 'RESERVA', 'CÓDIGO', 'DISCIPLINA', 'TURMA', 'PROFESSOR'])
