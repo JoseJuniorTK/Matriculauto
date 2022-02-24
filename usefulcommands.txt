@@ -1,0 +1,11 @@
+# Instalar Python
+sudo apt update
+sudo apt install software-properties-common
+
+sudo add-apt-repository ppa:deadsnakes/ppa
+sudo apt install python3.8
+
+#Pip install pro python certo
+
+python3.8 -m pip install pacote
+
