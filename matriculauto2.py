@@ -9,9 +9,10 @@ import PySimpleGUI as sg
 text3 = []
 count = 0
 loop = True
-layout = [[sg.Combo(sorted(sg.user_settings_get_entry('-filenames-', [])), default_value=sg.user_settings_get_entry('-last filename-', ''), size=(50, 1), key='-FILENAME-'), sg.FolderBrowse(), sg.B('Clear History')],
+sg.theme('Default')
+layout = [[sg.Combo(sorted(sg.user_settings_get_entry('-filenames-', [])), default_value=sg.user_settings_get_entry('-last filename-', ''), size=(50, 1), key='-FILENAME-'), sg.FolderBrowse('Escolher Pasta'), sg.B('Apagar Histórico')],
           [sg.Button('Iniciar'),  sg.Button('Sair')]]
-window = sg.Window('GERADOR DE SOLICITACAO DE MATRICULA', layout)
+window = sg.Window('GERADOR DE SOLICITACAO DE MATRICULA 1.0', layout, size=(650, 100), element_justification='c')
 while True:
     event, values = window.read()
     if event in (sg.WIN_CLOSED, 'Sair'):
